@@ -13,6 +13,7 @@ Este é um projeto básico em NestJS criado para praticar e entender o desenvolv
 
 O projeto segue uma estrutura baseada em DDD:
 
+```plaintext
 src/
 ├── application/     # Lógica de aplicação e serviços
 ├── domain/          # Entidades e schemas
