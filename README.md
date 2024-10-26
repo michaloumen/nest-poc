@@ -49,9 +49,12 @@ Aqui estão as rotas implementadas no projeto:
 
 ## Visualização das Rotas no Insomnia
 
-Abaixo está uma visualização das rotas configuradas no Insomnia para facilitar o uso:
+Abaixo está uma visualização das rotas configuradas no Insomnia:
 
-![Rotas no Insomnia](file-T7uyyit4vvxRc7CWDtjT9FoR)
+![image](https://github.com/user-attachments/assets/c2e8ee35-918b-4924-987c-70887ad4eaba)
+![image](https://github.com/user-attachments/assets/64d49b7f-6ef2-4aab-9f7f-25159ad3e0f3)
+![image](https://github.com/user-attachments/assets/9c8f81ed-e508-4138-8530-dd9a0b94c6b7)
+![image](https://github.com/user-attachments/assets/81af69ad-e439-424b-8eeb-0f24c18d0c36)
 
 ## Como Rodar o Projeto
 
