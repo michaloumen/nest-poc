@@ -1,5 +1,4 @@
-// src/application/hello-world/hello-world.service.ts
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { ObjectId, Collection } from 'mongodb';
 import { client } from '../../infra/database/papr';
 import { HelloWorldDocument } from '../../domain/schemas/hello-world.schema';
@@ -24,15 +23,35 @@ export class HelloWorldService {
   }
 
   async getMessage(id: string): Promise<HelloWorldDocument | null> {
-    // Verifique se o `id` é um ObjectId válido
     if (!ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid ID format');
     }
-    
     return await this.helloWorldCollection.findOne({ _id: new ObjectId(id) });
   }
 
   async getAllMessages(): Promise<HelloWorldDocument[]> {
     return await this.helloWorldCollection.find().toArray();
+  }
+
+  async duplicateMessageWithUpdate(id: string, newMessage: string): Promise<HelloWorldDocument> {
+    if (!ObjectId.isValid(id)) {
+      throw new BadRequestException('Invalid ID format');
+    }
+
+    const originalDocument = await this.helloWorldCollection.findOne({ _id: new ObjectId(id) });
+    if (!originalDocument) {
+      throw new NotFoundException(`Message with ID ${id} not found`);
+    }
+
+    const duplicatedDocument: HelloWorldDocument = {
+      _id: new ObjectId(),
+      message: newMessage,
+      createdAt: originalDocument.createdAt,
+      updatedAt: new Date(),
+    };
+
+    await this.helloWorldCollection.insertOne(duplicatedDocument);
+
+    return duplicatedDocument;
   }
 }
