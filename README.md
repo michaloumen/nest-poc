@@ -19,6 +19,7 @@ src/
 ├── domain/          # Entidades e schemas
 ├── infra/           # Configurações de banco de dados e serviços externos
 └── interface/       # Controllers e rotas
+```
 
 ## Rotas
 
