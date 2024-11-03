@@ -11,12 +11,13 @@ export class HelloWorldService {
     this.helloWorldCollection = client.db().collection<HelloWorldDocument>('hello_world');
   }
 
+  // POST: Cria documento apenas com createdAt
   async createMessage(message: string): Promise<HelloWorldDocument> {
     const newMessage: HelloWorldDocument = {
       _id: new ObjectId(),
       message,
       createdAt: new Date(),
-      updatedAt: new Date(),
+      // Removendo updatedAt no POST
     };
     await this.helloWorldCollection.insertOne(newMessage);
     return newMessage;
@@ -33,6 +34,7 @@ export class HelloWorldService {
     return await this.helloWorldCollection.find().toArray();
   }
 
+  // PATCH: Duplicar documento, mantendo createdAt e adicionando updatedAt
   async duplicateMessageWithUpdate(id: string, newMessage: string): Promise<HelloWorldDocument> {
     if (!ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid ID format');
@@ -47,7 +49,7 @@ export class HelloWorldService {
       _id: new ObjectId(),
       message: newMessage,
       createdAt: originalDocument.createdAt,
-      updatedAt: new Date(),
+      updatedAt: new Date(), // Adicionando updatedAt no PATCH
     };
 
     await this.helloWorldCollection.insertOne(duplicatedDocument);

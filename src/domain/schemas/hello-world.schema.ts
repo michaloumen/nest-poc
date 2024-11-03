@@ -1,4 +1,3 @@
-// src/domain/schemas/hello-world.schema.ts
 import { schema, types } from '../../infra/database/papr';
 import { ObjectId } from 'mongodb';
 
@@ -8,7 +7,7 @@ export const HelloWorldSchema = schema(
     _id: types.objectId({ required: true }),
     message: types.string({ required: true }),
     createdAt: types.date({ required: true }),
-    updatedAt: types.date({ required: true }),
+    updatedAt: types.date({ required: false }), // Torna updatedAt opcional
   },
   {
     timestamps: true,
@@ -20,5 +19,5 @@ export type HelloWorldDocument = {
   _id: ObjectId;
   message: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt?: Date; // Define updatedAt como opcional
 };
